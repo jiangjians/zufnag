@@ -15,3 +15,13 @@ export const login = ({ username, password }) => {
     }
   })
 }
+/**
+ *获取用户资料
+ * @returns
+ */
+export const getUserInfo = () => {
+  return request({
+    url: 'user'
+
+  })
+}

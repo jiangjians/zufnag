@@ -35,7 +35,8 @@
 export default {
   created () { },
   data () {
-    return {}
+    return {
+    }
   },
   methods: {},
   computed: {},
@@ -46,7 +47,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-.iconfont{
-font-size: 44px;
+.iconfont {
+  font-size: 44px;
 }
 </style>

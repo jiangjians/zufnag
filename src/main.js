@@ -7,7 +7,7 @@ import Vant from 'vant'
 // import 'vant/lib/index.css'
 import 'vant/lib/index.less'
 import '@/assets/iconfont/iconfont.css'
-
+import '@/styles/reset.less'
 Vue.config.productionTip = false
 Vue.use(Vant)
 new Vue({

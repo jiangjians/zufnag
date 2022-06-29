@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     onClickLeft () {
-      this.$router.push('/my')
+      this.$router.back()
     },
 
     async onSubmit (values) {
@@ -49,7 +49,7 @@ export default {
       })
       try {
         if (this.username.length === 0 || this.password.length === 0) { return this.$toast('不能为空') }
-        const c = /^[a-zA-Z0-9]{5,8}$/
+        const c = /^[a-zA-Z0-9]{5,16}$/
         const d = /^[a-zA-Z0-9]{6,12}$/
         if (!this.username.match(c)) { return this.$toast('账号的格式为5~8位的数字和字母') }
         if (!this.password.match(d)) { return this.$toast('密码的格式为5~8位的数字和字母') }

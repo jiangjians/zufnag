@@ -9,30 +9,12 @@
       @search="onSearch"
     >
       <template #action>
-        <div @click="onSearch">搜索</div>
+        <van-icon name="search" class="search"/>
       </template>
     </van-search>
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-      <van-swipe-item>
-        <van-image
-          width="100%"
-          height="100%"
-          src="http://liufusong.top:8080/img/swiper/1.png"
-        />
-      </van-swipe-item>
-      <van-swipe-item>
-        <van-image
-          width="100%"
-          height="100%"
-          src="http://liufusong.top:8080/img/swiper/2.png"
-        />
-      </van-swipe-item>
-      <van-swipe-item>
-        <van-image
-          width="100%"
-          height="100%"
-          src="http://liufusong.top:8080/img/swiper/3.png"
-        />
+      <van-swipe-item v-for="item in imgList" :key="item.id">
+        <van-image width="100%" height="100%" :src="baseurl + item.imgSrc" />
       </van-swipe-item>
     </van-swipe>
   </div>
@@ -40,17 +22,32 @@
 
 <script>
 
+import { getimg } from '@/api/home'
 export default {
-  created () { },
+
+  created () {
+    this.getimg()
+  },
+
   data () {
     return {
-      value: ''
-
+      value: '',
+      imgList: [],
+      baseurl: 'http://liufusong.top:8080'
     }
   },
   methods: {
     onSearch () { },
-    onClickRight () { }
+    onClickRight () { },
+    async getimg () {
+      try {
+        const res = await getimg()
+        this.imgList = res.data.body
+        console.log(res)
+      } catch (error) {
+        console.log(error)
+      }
+    }
   },
   computed: {},
   watch: {},
@@ -73,9 +70,13 @@ export default {
   padding: 10px 10px 10px 16px;
 }
 .my-swipe .van-swipe-item {
+  height: 414px;
   color: #333;
   font-size: 20px;
   line-height: 150px;
   text-align: center;
+}
+.search{
+  border: unset;
 }
 </style>
