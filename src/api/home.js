@@ -10,3 +10,13 @@ export const getimg = () => {
     url: '/home/swiper'
   })
 }
+
+/**
+ * 租房小组信息
+ * @returns
+ */
+export const getgroup = () => {
+  return request({
+    url: '/home/groups'
+  })
+}
