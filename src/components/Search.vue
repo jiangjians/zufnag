@@ -20,11 +20,15 @@
 
 <script>
 export default {
-  created () { },
+  created () {
+
+  },
   data () {
     return {}
   },
-  methods: {},
+  methods: {
+
+  },
   computed: {},
   watch: {},
   filters: {},
@@ -34,7 +38,7 @@ export default {
 
 <style scoped lang='less'>
 .topnav {
-  width: 100%;
+  width: 750px;
   display: flex;
   position: fixed;
   justify-content: space-between;
@@ -53,7 +57,7 @@ export default {
     line-height: 38px;
     border-radius: 6px;
     .location {
-      width: 84px;
+      width: 100px;
       span {
         font-size: 28px;
         margin-right: 4px;

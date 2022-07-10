@@ -10,7 +10,7 @@
         <div>
           <p>{{ userInfo.nickname }}</p>
           <van-button type="info" @click="logout"> 退出 </van-button>
-          <div class="bianji">
+          <div class="bianji" @click="$router.push('/user')">
             编辑个人资料
             <van-icon name="play" />
           </div>

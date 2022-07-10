@@ -10,7 +10,7 @@
     </van-swipe>
     <!-- 租房分类 -->
     <van-grid :border="false" center>
-      <van-grid-item class="zufang-nav">
+      <van-grid-item class="zufang-nav" @click="$router.push('/findroom')" >
         <van-image
           width="60"
           height="60"
@@ -18,7 +18,7 @@
         />
         <span>整租</span>
       </van-grid-item>
-      <van-grid-item class="zufang-nav">
+      <van-grid-item class="zufang-nav" @click="$router.push('/findroom')">
         <van-image
           width="60"
           height="60"
@@ -34,7 +34,7 @@
         />
         <span>地图找房</span>
       </van-grid-item>
-      <van-grid-item class="zufang-nav">
+      <van-grid-item class="zufang-nav" @click="$router.push('/room')">
         <van-image
           width="60"
           height="60"
@@ -75,6 +75,7 @@ export default {
   created () {
     this.getimg()
     this.getgroup()
+    this.updateCity()
   },
 
   data () {
@@ -101,6 +102,12 @@ export default {
         console.log(res)
       } catch (error) {
         console.log(error)
+      }
+    },
+    updateCity () {
+      if (JSON.stringify(this.$store.state.city) === '{}') {
+        console.log('sadaw', this.$store.state.city)
+        this.$store.commit('setCity', '北京')
       }
     }
   },

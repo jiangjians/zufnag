@@ -47,6 +47,7 @@ export default {
 </script>
 
 <style scoped lang="less">
+
 .iconfont {
   font-size: 44px;
 }

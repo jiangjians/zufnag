@@ -16,7 +16,7 @@ export const getcity = (level) => {
  * 热门城市列表
  * @returns
  */
-export const gethotcity = (level) => {
+export const gethotcity = () => {
   return request({
     url: '/area/hot'
   })
@@ -25,18 +25,11 @@ export const gethotcity = (level) => {
  * 根据城市名称查询该城市信息
  * @returns
  */
-export const getcityinfo = () => {
+export const getcityinfo = (name) => {
   return request({
-    url: '/area/info'
-
-  })
-}
-/**
- * 根据城市名称查询该城市信息
- * @returns
- */
-export const cityinfo = () => {
-  return request({
-    url: '/area'
+    url: '/area/info',
+    params: {
+      name
+    }
   })
 }
