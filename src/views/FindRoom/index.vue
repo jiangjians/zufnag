@@ -7,39 +7,44 @@
     <!-- 下拉导航 -->
     <van-sticky>
       <van-dropdown-menu>
-        <van-dropdown-item title="区域">
+        <van-dropdown-item title="区域" ref="menu1">
           <van-picker
-            show-toolbar
             title="标题"
             :columns="columns"
             value-key="label"
             item-height="34"
           />
           <div class="button">
-            <van-button type="primary" class="btn1">取消</van-button>
+            <van-button type="primary" class="btn1" @click="onCancel1"
+              >取消</van-button
+            >
             <van-button type="primary" class="btn2" @click="onConfirm"
               >确定</van-button
             >
           </div>
         </van-dropdown-item>
-        <van-dropdown-item title="方式">
+        <van-dropdown-item title="方式" ref="menu2">
           <van-picker :columns="columns1" value-key="label">
             <template #columns-bottom>
               <div class="button">
-                <van-button type="primary" class="btn1">取消</van-button>
-                <van-button type="primary" class="btn2" @click="fs_ajax"
+                <van-button type="primary" class="btn1" @click="onCancel2"
+                  >取消</van-button
+                >
+                <van-button type="primary" class="btn2" @click="onConfirm"
                   >确定</van-button
                 >
               </div>
             </template>
           </van-picker>
         </van-dropdown-item>
-        <van-dropdown-item title="租金">
+        <van-dropdown-item title="租金" ref="menu3">
           <van-picker :columns="columns2" value-key="label">
             <template #columns-bottom>
               <div class="button">
-                <van-button type="primary" class="btn1">取消</van-button>
-                <van-button type="primary" class="btn2" @click="fs_ajax"
+                <van-button type="primary" class="btn1" @click="onCancel3"
+                  >取消</van-button
+                >
+                <van-button type="primary" class="btn2" @click="onConfirm"
                   >确定</van-button
                 >
               </div>
@@ -89,23 +94,32 @@
       <p>111</p>
       <p>111</p>
       <van-sticky>
-        <template #columns-bottom>
-          <div class="button">
-            <van-button type="primary" class="btn1">取消</van-button>
-            <van-button type="primary" class="btn2" @click="fs_ajax"
-              >确定</van-button
-            >
-          </div>
-        </template>
+        <div class="button">
+          <van-button type="primary" class="btn1" @click="is_show = false"
+            >取消</van-button
+          >
+          <van-button type="primary" class="btn2" @click="onConfirm"
+            >确定</van-button
+          >
+        </div>
       </van-sticky>
     </van-popup>
-    <van-card
-      num="2"
-      price="2.00"
-      desc="描述信息"
-      title="商品标题"
-      thumb="https://img01.yzcdn.cn/vant/ipad.jpeg"
-    />
+    <div class="house">
+      <div v-for="(item, index) in houseList" :key="index">
+        <van-card
+          :price="item.price"
+          :desc="item.desc"
+          :title="item.title"
+          :thumb="baseurl + item.houseImg"
+          @click="
+            $router.push({
+              name: 'HouseSpecificInfo',
+              params: { houseCode: item.houseCode },
+            })
+          "
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -127,7 +141,10 @@ export default {
       is_show: false,
       cityInfo: {},
       subcityList: {},
-      value: ''
+      houseList: [],
+      value: '',
+      baseurl: 'http://liufusong.top:8080',
+      end: 99
     }
   },
   methods: {
@@ -150,21 +167,29 @@ export default {
         this.columns = [this.subcityList.area, this.subcityList.subway]
         this.columns1 = res1.data.body.rentType
         this.columns2 = res1.data.body.price
-        console.log('ssss', this.columns.values)
-        console.log('ss', res1)
       } catch (error) {
         console.log(error)
       }
       try {
-        const res2 = await getHouse()
-        console.log(res2)
+        const res2 = await getHouse({ end: this.end })
+        this.houseList = res2.data.body.list
+        console.log('res2', res2)
       } catch (error) {
         console.log(error)
       }
     },
-    onConfirm (value) {
-      this.value = value
-      console.log(this.value)
+    onConfirm () {
+      this.value = this.columns.value
+      console.log('ssssss', this.value)
+    },
+    onCancel1 () {
+      this.$refs.menu1.toggle()
+    },
+    onCancel2 () {
+      this.$refs.menu2.toggle()
+    },
+    onCancel3 () {
+      this.$refs.menu3.toggle()
     }
   },
   computed: {
@@ -195,9 +220,6 @@ export default {
     width: 540px;
   }
 }
-/deep/ .van-picker__toolbar {
-  display: none;
-}
 .button {
   width: 100%;
   height: 100px;
@@ -218,5 +240,8 @@ export default {
     color: #fff;
     font-size: 36px;
   }
+}
+.house {
+  margin-bottom: 100px;
 }
 </style>

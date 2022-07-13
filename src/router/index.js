@@ -12,6 +12,7 @@ const City = () => import('@/views/City')
 const Login = () => import('@/views/Login')
 const User = () => import('@/views/User')
 const Room = () => import('@/views/Room')
+const HouseSpecificInfo = () => import('@/components/HouseSpecificInfo.vue')
 const routes = [
   {
     path: '/',
@@ -30,7 +31,10 @@ const routes = [
   },
   { path: '/city', component: City },
   { path: '/user', component: User },
-  { path: '/room', component: Room }
+  { path: '/room', component: Room },
+  {
+    path: '/detail/:houseCode', component: HouseSpecificInfo, name: 'HouseSpecificInfo', props: true// paramsz组件相关的路由加props:true可以让路由和组件解耦
+  }
 ]
 
 const router = new VueRouter({

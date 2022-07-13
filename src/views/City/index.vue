@@ -48,7 +48,8 @@ export default {
           } else {
             obj[f] = [item]
           }
-          this.obj = { ...obj, ...this.cityList }
+          // console.log('ss', obj)
+          this.obj = { ...obj }
           this.cityLetterList = Object.keys(obj).sort()
         })
         // 导航索引
